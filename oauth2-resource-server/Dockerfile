@@ -12,7 +12,7 @@ RUN mvn clean package -DskipTests
 
 FROM amazoncorretto:21-alpine-jdk
 
-COPY target/*.jar app.jar
+COPY --from=build /app/target/*.jar app.jar
 
 CMD apt-get update -y
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -20,6 +21,13 @@ public class UserController {
 
     @Autowired
     UserRepository userRepository;
+
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> list() {
+        List<User> users = userRepository.findAll();
+
+        return ResponseEntity.ok(UserDTO.toResponseAllUsers(users));
+    }
 
     @GetMapping("/me")
     public ResponseEntity<UserDTO> me(Authentication authentication) {

@@ -2,11 +2,11 @@ jwt:
   access-token:
     private-key: classpath:access-token-private.key
     public-key: classpath:access-token-public.key
-    expires-in: 86400 # 1DAY in seconds
+    expires-in: ${EXPIRES_IN_ACCESS_TOKEN:10} # 10 seconds
   refresh-token:
     private-key: classpath:refresh-token-private.key
     public-key: classpath:refresh-token-public.key
-    expires-in: 604800 # 7DAYS in seconds
+    expires-in: ${EXPIRES_IN_REFRESH_TOKEN:604800}  # 7DAYS in seconds
 spring:
   application:
     name: oauth2-resource-server
@@ -19,3 +19,6 @@ spring:
     database-platform: org.hibernate.dialect.H2Dialect
   h2:
     console.enabled: true
+#server:
+#  servlet:
+#    context-path: /api
